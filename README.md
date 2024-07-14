@@ -15,7 +15,7 @@ Welcome to CLI Bank Service - a simple command-line interface application for ma
 ## Screenshots
 
 ### Main Menu
-![Main Menu](./path/to/your/image1.png)
+![Main Menu](./presentation/img.png)
 
 - type 1 to show accounts - Displays all existing accounts.
 - type 2 to create account - Allows you to create a new bank account.
@@ -27,7 +27,7 @@ Transfer - Transfer money between accounts.
 This message - Display the menu options.
 
 ### Account Creation
-![Account Creation](./path/to/your/image2.png)
+![Account Creation](./presentation/img_1.png)
 
 ## Usage
 
