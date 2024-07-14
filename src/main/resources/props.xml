@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="myCLI" class="com.example.demo.io.MyCLI"/>
+
+    <bean id="dao" class="com.example.demo.dao.MemoryAccountDAO"/>
+
+    <bean id="creationImpl" class="com.example.demo.service.AccountCreationServiceImpl">
+        <constructor-arg ref="dao"/>
+    </bean>
+
+    <bean id="bankCore" class="com.example.demo.entity.BankCore">
+        <constructor-arg ref="creationImpl"/>
+    </bean>
+
+    <bean id="listingImpl" class="com.example.demo.service.AccountListingServiceImpl">
+        <constructor-arg ref="dao"/>
+    </bean>
+
+    <bean id="basicCLI" class="com.example.demo.io.AccountBasicCLI">
+        <constructor-arg index="0" ref="myCLI"/>
+        <constructor-arg index="1" ref="bankCore"/>
+        <constructor-arg index="2" ref="listingImpl"/>
+    </bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
