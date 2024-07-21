@@ -1,12 +1,13 @@
 package com.example.demo;
 
-import com.example.demo.entity.AccountType;
-import com.example.demo.io.AccountBasicCLI;
-import com.example.demo.io.MyCLI;
+import com.example.demo.account.util.AccountType;
+import com.example.demo.account.io.AccountBasicCLI;
+import com.example.demo.account.io.MyCLI;
+import com.example.demo.transaction.io.TransactionDepositCLI;
+import com.example.demo.transaction.io.TransactionWithdrawCLI;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -17,42 +18,37 @@ import java.util.regex.Pattern;
 public class DemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("props.xml");
         System.out.println("Welcome to CLI bank service");
-
-
-        MyCLI myCLI = (MyCLI) context.getBean(MyCLI.class);
-        AccountBasicCLI basicCLI = (AccountBasicCLI) context.getBean(AccountBasicCLI.class);
         String clientID = "1";
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("1 - show accounts \n" +
-                "2 - create account \n" +
-                "3 - deposit \n" +
-                "4 - withdraw \n" +
-                "5 - transfer \n" +
-                "6 - this message \n" +
-                "7 - exit");
+        MyCLI myCLI = context.getBean(MyCLI.class);
+        AccountBasicCLI basicCLI = context.getBean(AccountBasicCLI.class);
+        TransactionDepositCLI transactionDepositCLI = context.getBean(TransactionDepositCLI.class);
+        TransactionWithdrawCLI transactionWithdrawCLI = context.getBean(TransactionWithdrawCLI.class);
+
+        String menuMessage = """
+                1 - show accounts\s
+                2 - create account\s
+                3 - deposit\s
+                4 - withdraw\s
+                5 - transfer\s
+                6 - this message\s
+                7 - exit""";
+        System.out.println(menuMessage);
+
         label:
-        while (true){
-            String cli = scanner.nextLine();
-            String regex = "^[1-7]$";
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(cli);
-            if (!matcher.matches()) {
-                System.out.println(cli + " не соответствует списку команд.");
+        while (true){;
+            String input = myCLI.getScanner().nextLine();
+            if (!input.matches("[1-7]"))
                 continue;
-            }
 
-            switch (cli) {
+            switch (input) {
                 case "1":
                     basicCLI.getAccounts(clientID);
                     break;
                 case "2":
-                    System.out.println("Choose account type \n" +
-                            Arrays.toString(AccountType.values()));
                     try {
                         basicCLI.createAccountRequest(clientID);
                         System.out.println("Bank account created");
@@ -61,9 +57,29 @@ public class DemoApplication {
                         continue;
                     }
                     break;
+                case "3":
+                    try {
+                        transactionDepositCLI.depositMoney(clientID);
+                    } catch (Exception e) {
+                        System.out.println(e + " Incorrect input data");
+                    }
+                    break;
+                case "4":
+                    try {
+                        transactionWithdrawCLI.withdrawMoney(clientID);
+                    } catch (Exception e){
+                        System.out.println(e + " Incorrect input data !");
+                    }
+                    break;
+                case "6":
+                    System.out.println(menuMessage);
+                    break;
                 case "7":
                     System.out.println("Application closed !");
                     break label;
+                default:
+                    System.out.println("Command not recognized!\n");
+                    break;
             }
         }
     }

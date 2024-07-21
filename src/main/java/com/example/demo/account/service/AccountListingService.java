@@ -1,8 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.account.service;
 
-import com.example.demo.entity.Account;
-import com.example.demo.entity.AccountType;
-import com.example.demo.entity.AccountWithdraw;
+import com.example.demo.account.domen.Account;
+import com.example.demo.account.domen.AccountWithdraw;
+import com.example.demo.account.util.AccountType;
 
 import java.util.List;
 

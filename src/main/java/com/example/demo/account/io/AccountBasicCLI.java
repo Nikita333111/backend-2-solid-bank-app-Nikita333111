@@ -1,10 +1,12 @@
-package com.example.demo.io;
+package com.example.demo.account.io;
 
-import com.example.demo.entity.AccountType;
-import com.example.demo.entity.BankCore;
-import com.example.demo.service.AccountListingService;
-import com.example.demo.service.CreateAccountOperationUI;
+import com.example.demo.account.domen.BankCore;
+import com.example.demo.account.service.AccountListingService;
+import com.example.demo.account.util.AccountType;
+import com.example.demo.account.service.CreateAccountOperationUI;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AccountBasicCLI {
     private CreateAccountOperationUI createAccountOperationUI;
     private BankCore bankCore;
@@ -22,7 +24,7 @@ public class AccountBasicCLI {
     }
 
     public void getAccounts(String clientID){
-        accountListingService.getClientAccounts(clientID).forEach(System.out::println);
+        System.out.println(accountListingService.getClientAccounts(clientID));
     }
 }
 

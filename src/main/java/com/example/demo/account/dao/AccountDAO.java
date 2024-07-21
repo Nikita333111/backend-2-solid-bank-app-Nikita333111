@@ -1,8 +1,8 @@
-package com.example.demo.dao;
+package com.example.demo.account.dao;
 
-import com.example.demo.entity.Account;
-import com.example.demo.entity.AccountType;
-import com.example.demo.entity.AccountWithdraw;
+import com.example.demo.account.domen.Account;
+import com.example.demo.account.util.AccountType;
+import com.example.demo.account.domen.AccountWithdraw;
 
 import java.util.List;
 

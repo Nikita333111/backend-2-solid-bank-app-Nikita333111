@@ -1,14 +1,14 @@
-package com.example.demo.service;
+package com.example.demo.account.service;
 
-import com.example.demo.dao.AccountDAO;
-import com.example.demo.dao.MemoryAccountDAO;
-import com.example.demo.entity.Account;
-import com.example.demo.entity.AccountType;
-import com.example.demo.entity.AccountWithdraw;
+import com.example.demo.account.dao.AccountDAO;
+import com.example.demo.account.domen.Account;
+import com.example.demo.account.domen.AccountWithdraw;
+import com.example.demo.account.util.AccountType;
+import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.util.List;
 
+@Service
 public class AccountListingServiceImpl implements AccountListingService {
     private AccountDAO accountDAO;
 

@@ -1,14 +1,16 @@
-package com.example.demo.dao;
+package com.example.demo.account.dao;
 
-import com.example.demo.entity.Account;
-import com.example.demo.entity.AccountType;
-import com.example.demo.entity.AccountWithdraw;
+import com.example.demo.account.domen.Account;
+import com.example.demo.account.domen.AccountWithdraw;
+import com.example.demo.account.util.AccountType;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Repository
 public class MemoryAccountDAO implements AccountDAO{
     private List<Account> accountList;
 
@@ -55,7 +57,8 @@ public class MemoryAccountDAO implements AccountDAO{
     public AccountWithdraw getClientWithdrawAccount(String clientID, String accountID) {
         for (Account account : accountList){
             if (account.getClientID().equals(clientID) && account.getId().equals(accountID))
-                return (AccountWithdraw) account;
+                if(account.isWithdrawAllowed())
+                    return (AccountWithdraw) account;
         }
         System.out.println("can't find an account");
         return null;

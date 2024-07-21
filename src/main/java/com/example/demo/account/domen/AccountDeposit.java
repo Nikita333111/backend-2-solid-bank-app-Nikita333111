@@ -1,4 +1,6 @@
-package com.example.demo.entity;
+package com.example.demo.account.domen;
+
+import com.example.demo.account.util.AccountType;
 
 // только снимать
 public class AccountDeposit extends Account{
