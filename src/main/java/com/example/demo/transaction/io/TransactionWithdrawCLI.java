@@ -15,8 +15,9 @@ public class TransactionWithdrawCLI {
 
     public void withdrawMoney(String clientID){
         String accountID = withdrawDepositOperationCLIUI.requestClientAccountNumber();
+        long accountId = Long.parseLong(accountID.substring(3));
 
-        AccountWithdraw accountWithdraw = accountListing.getClientWithdrawAccount(clientID, accountID);
+        AccountWithdraw accountWithdraw = accountListing.getClientWithdrawAccount(clientID, accountId);
         if(accountWithdraw == null)
             throw new IllegalArgumentException("Account with such id is not withdraw or doesnt exist");
 

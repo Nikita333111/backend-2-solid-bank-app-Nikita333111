@@ -1,14 +1,10 @@
 package com.example.demo.transaction.io;
 
 import com.example.demo.account.domen.Account;
-import com.example.demo.account.domen.AccountDeposit;
-import com.example.demo.account.domen.AccountWithdraw;
 import com.example.demo.account.service.AccountListingService;
 import com.example.demo.transaction.domen.TransactionDeposit;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.InputMismatchException;
 
 @Component
 @AllArgsConstructor
@@ -24,7 +20,8 @@ public class TransactionDepositCLI {
         if (amount <= 0) {
             throw new IllegalArgumentException("amount of money must be positive");
         }
-        Account account = accountListing.getClientAccount(clientID, accountID);
+        long accountId = Long.parseLong(accountID.substring(3));
+        Account account = accountListing.getClientAccount(clientID, accountId);
 
         transactionDeposit.execute(account, amount);
 

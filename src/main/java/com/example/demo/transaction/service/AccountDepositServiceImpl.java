@@ -1,20 +1,19 @@
 package com.example.demo.transaction.service;
 
-import com.example.demo.account.dao.AccountDAO;
+import com.example.demo.account.dao.AccountDaoRepository;
 import com.example.demo.account.domen.Account;
-import com.example.demo.account.domen.AccountWithdraw;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class AccountDepositServiceImpl implements AccountDepositService{
-    private AccountDAO accountDAO;
+    private AccountDaoRepository accountDaoRepository;
 
     @Override
     public void deposit(double amount, Account account) {
         double newAmount = account.getBalance() + amount;
         account.setBalance(newAmount);
-        accountDAO.updateAccount(account);
+        accountDaoRepository.save(account);
     }
 }

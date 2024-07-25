@@ -7,9 +7,9 @@ import com.example.demo.account.util.AccountType;
 import java.util.List;
 
 public interface AccountListingService {
-    Account getClientAccount(String clientID, String accountID);
+    Account getClientAccount(String clientID, Long accountID);
 
-    AccountWithdraw getClientWithdrawAccount(String clientID, String accountID);
+    AccountWithdraw getClientWithdrawAccount(String clientID, Long accountID);
 
     List<Account> getClientAccounts(String clientID);
 

@@ -5,8 +5,6 @@ import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.IllegalFormatException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 @Component
 @Getter

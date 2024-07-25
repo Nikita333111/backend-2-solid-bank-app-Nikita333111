@@ -34,4 +34,4 @@ Transfer - Transfer money between accounts.
 To start the application, run the following commands:
 
 ```sh
-git clone https://github.com/yourusername/cli-bank-service.git
+git clone repoLink.git
