@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Account;
-import com.example.demo.entity.AccountType;
-import com.example.demo.entity.AccountWithdraw;
+import com.example.demo.entity.account.Account;
+import com.example.demo.entity.account.AccountWithdraw;
+import com.example.demo.AccountType;
 
 import java.util.List;
 
@@ -14,4 +14,10 @@ public interface AccountListingService {
     List<Account> getClientAccounts(String clientID);
 
     List<Account> getClientAccountsByType(String clientID, AccountType accountType);
+
+    List<Account> getAccounts();
+
+    Account getAccount(String accountId);
+
+    void deleteAccount(String accountId);
 }
