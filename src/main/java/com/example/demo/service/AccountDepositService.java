@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.account.Account;
-import com.example.demo.entity.transaction.Transaction;
+import com.example.demo.account.entity.Account;
+import com.example.demo.transaction.entity.Transaction;
 
 public interface AccountDepositService {
     void deposit(double amount, Account account);

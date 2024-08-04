@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.account.Account;
-import com.example.demo.entity.account.AccountDTO;
-import com.example.demo.service.AccountCreationService;
-import com.example.demo.service.AccountListingService;
-import com.example.demo.entity.transaction.Transaction;
-import com.example.demo.service.AccountDepositService;
-import com.example.demo.service.AccountWithdrawService;
+import com.example.demo.account.entity.Account;
+import com.example.demo.account.entity.AccountDTO;
+import com.example.demo.service.*;
+import com.example.demo.transaction.entity.Transaction;
+import com.example.demo.transaction.entity.TransferTransaction;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +23,7 @@ public class AccountController {
     private AccountCreationService accountCreationService;
     private AccountDepositService accountDepositService;
     private AccountWithdrawService accountWithdrawService;
+    private AccountTransferService accountTransferService;
 
 
     @GetMapping
@@ -71,6 +71,14 @@ public class AccountController {
         List<Transaction> transactions = account.getTransactions();
 
         return new ResponseEntity<>(transactions, HttpStatus.OK);
+    }
+
+    @PostMapping("/{account_id}/transfer")
+    public ResponseEntity<Transaction> transfer(@PathVariable String account_id,
+                                                @RequestBody TransferTransaction transferTransaction){
+        Transaction transaction = accountTransferService.transfer(account_id, transferTransaction);
+
+        return ResponseEntity.ok(transaction);
     }
 
 }

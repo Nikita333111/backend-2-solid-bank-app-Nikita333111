@@ -1,10 +1,13 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.AccountDaoRepository;
-import com.example.demo.AccountType;
-import com.example.demo.entity.account.Account;
-import com.example.demo.entity.account.AccountDTO;
+import com.example.demo.account.dao.AccountDaoRepository;
+import com.example.demo.account.entity.AccountType;
+import com.example.demo.account.entity.Account;
+import com.example.demo.account.entity.AccountDTO;
+import com.example.demo.client.entity.Client;
 import com.example.demo.service.AccountCreationService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -41,12 +44,13 @@ public class AccountCreationServiceImpl implements AccountCreationService {
         String accountNumber = String.format("%03d%06d", 1, lastAccountNumber);
         incrementLastAccountNumber();
 
+        Long clientID = ((Client)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getClientId();
         Account account = Account.builder()
                 .accountId(accountNumber)
                 .accountType(accountDTO.getAccountType())
                 .balance(START_BALANCE)
                 .withdrawAllowed(withdraw)
-                .clientID("1")
+                .clientID(String.valueOf(clientID))
                 .build();
         return accountDaoRepository.save(account);
     }

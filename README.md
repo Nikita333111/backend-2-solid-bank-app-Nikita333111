@@ -1,5 +1,7 @@
 # CLI Bank Service
 
+##### (Для тестирования приложения перейдите на swagger, пройдите регистрацию и скопируйте jwt token. После этого нажмите на Authorize и вставьте токен в поле ввода, после этого можно обращаться к запросам). БД доступна по url localhost:8080/h2-console
+
 Welcome to CLI Bank Service - a simple command-line interface application for managing bank accounts.
 
 ## Features

@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.account.AccountWithdraw;
-import com.example.demo.entity.transaction.Transaction;
+import com.example.demo.account.entity.AccountWithdraw;
+import com.example.demo.transaction.entity.Transaction;
 import org.springframework.stereotype.Service;
 
 @Service

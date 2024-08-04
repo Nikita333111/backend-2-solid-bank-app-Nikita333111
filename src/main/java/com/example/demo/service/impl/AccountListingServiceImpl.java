@@ -1,11 +1,13 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.AccountDaoRepository;
-import com.example.demo.entity.account.Account;
-import com.example.demo.entity.account.AccountWithdraw;
-import com.example.demo.AccountType;
+import com.example.demo.account.dao.AccountDaoRepository;
+import com.example.demo.account.entity.Account;
+import com.example.demo.account.entity.AccountWithdraw;
+import com.example.demo.account.entity.AccountType;
+import com.example.demo.client.entity.Client;
 import com.example.demo.exceptions.AccountNotFound;
 import com.example.demo.service.AccountListingService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,17 +46,20 @@ public class AccountListingServiceImpl implements AccountListingService {
 
     @Override
     public List<Account> getAccounts() {
-        return (List<Account>) accountDaoRepository.findAll();
+        Long clientID = ((Client)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getClientId();
+        return (List<Account>) accountDaoRepository.findAccountsByClientID(String.valueOf(clientID));
     }
 
     @Override
     public Account getAccount(String accountId) {
-        return accountDaoRepository.findById(accountId).orElseThrow(() -> new AccountNotFound(accountId));
+        Long clientID = ((Client)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getClientId();
+        return accountDaoRepository.findAccountByClientIDAndAccountId(String.valueOf(clientID),accountId).orElseThrow(() -> new AccountNotFound(accountId));
     }
 
     @Override
     public void deleteAccount(String accountId) {
-        accountDaoRepository.findById(accountId).orElseThrow(() -> new AccountNotFound(accountId));
+        Long clientID = ((Client)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getClientId();
+        accountDaoRepository.findAccountByClientIDAndAccountId(String.valueOf(clientID),accountId).orElseThrow(() -> new AccountNotFound(accountId));
         accountDaoRepository.deleteById(accountId);
     }
 }

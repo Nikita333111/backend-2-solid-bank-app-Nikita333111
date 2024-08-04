@@ -1,6 +1,5 @@
-package com.example.demo.entity.account;
+package com.example.demo.account.entity;
 
-import com.example.demo.AccountType;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

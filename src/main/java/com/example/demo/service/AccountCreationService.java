@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.account.Account;
-import com.example.demo.entity.account.AccountDTO;
-import com.example.demo.AccountType;
+import com.example.demo.account.entity.Account;
+import com.example.demo.account.entity.AccountDTO;
+import com.example.demo.account.entity.AccountType;
 
 public interface AccountCreationService {
     void create(AccountType accountType, long bankID, String clientID, long accountId);

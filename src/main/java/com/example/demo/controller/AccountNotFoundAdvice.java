@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.exceptions.AccountNotFound;
 import com.example.demo.exceptions.AccountNotWithdraw;
+import com.example.demo.exceptions.EmailAlreadyExist;
 import com.example.demo.exceptions.InvalidAmount;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -32,4 +33,10 @@ public class AccountNotFoundAdvice {
         return ex.getMessage();
     }
 
+    @ResponseBody
+    @ExceptionHandler({EmailAlreadyExist.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String invalidEmail(EmailAlreadyExist ex){
+        return ex.getMessage();
+    }
 }

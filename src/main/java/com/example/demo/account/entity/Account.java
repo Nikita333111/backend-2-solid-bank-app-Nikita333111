@@ -1,7 +1,6 @@
-package com.example.demo.entity.account;
+package com.example.demo.account.entity;
 
-import com.example.demo.AccountType;
-import com.example.demo.entity.transaction.Transaction;
+import com.example.demo.transaction.entity.Transaction;
 import jakarta.persistence.*;
 import lombok.*;
 
